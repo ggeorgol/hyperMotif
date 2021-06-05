@@ -1,6 +1,6 @@
 # TF_motif_enrichment
 
-<h1>Map transcription factor binding motifs to non-overlapping genomic regions and perform hypergeometric over/under representation test between groups</h1>
+<h4>Map transcription factor binding motifs to non-overlapping genomic regions and perform hypergeometric over/under representation test between groups</h4>
 
 Input file format: 
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
