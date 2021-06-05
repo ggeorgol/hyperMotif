@@ -4,9 +4,11 @@
 
 <h4>Prerequisites:</h4>
 <a href='https://github.com/samtools/htslib/releases/download/1.12/htslib-1.12.tar.bz2'>htslib</a>
+<br>
 <a href="https://bedops.readthedocs.io/en/latest/">bedops</a>
+<br>
 R
-
+<br>
 Input file format: 
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
 2. motifs .gz file.
