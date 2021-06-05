@@ -12,7 +12,7 @@ Input file format:
 
 example:
 
-`chr1    123456    123465    0
+`chr1    123456    123465    0\n
  chr1    654321    654432    1`
 
 
