@@ -35,7 +35,7 @@ In order to run the script in your local directory follow these steps:
 2.    `cd ~/my/directory` #enter the directory
 3.    make sure your bed file is in the directory
 4.    `cp /home/ggeorgol/scripts/hypergeo_motif_enrichment.sh ./` #make a copy to the first part of the script
-5.    `cp /home/ggeorgol/scripts/hypergeo_motif_enrichment.sh ./` #make a copy to the second part of the script
+5.    `cp /home/ggeorgol/scripts/hypergeo_motif_enrichment.R ./` #make a copy to the second part of the script
 6.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz` #Copy motif archetype .gz file
 7.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz.tbi` #Copy the tabix index file
 8.    `./hypergeo_motif_enrichment.sh test.bed hg38.archetype_motifs.v1.0.bed.gz` #run the script
