@@ -9,9 +9,10 @@
 <br>
 R
 <br>
+
 Input file format: 
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
-2. motifs .gz file.
+2. motifs .gz file and accompanying tabix
 
 example:
 
@@ -47,7 +48,4 @@ In order to run the script in your local directory follow these steps:
 7.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz.tbi` #Copy the tabix index file
 8.    `./hypergeo_motif_enrichment.sh test.bed hg38.archetype_motifs.v1.0.bed.gz` #run the script
 
-The progress of the script will appear on the screen. Takes about 6 min to run for ~100k elements. The results table should appear in your folder: motif_hypergeometric_enrichment_results.txt
-
-If you want to run the script again, make sure your new bed file is in that directory and start from step 8 directly
-
+The progress of the script will appear on the screen. Takes <5 min to run for ~100k elements. The results table should appear in your folder: `enrichment_results.txt`
