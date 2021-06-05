@@ -1,10 +1,6 @@
 # TF_motif_enrichment
 
-######################################################
-#####        HYPERGEOMETRIC ENRICHMENT TEST      #####
-##### FOR TF BINDING MOTIFS  IN GENOMIC REGIONS  #####
-#####      (c) GRIGORIOS GEORGOLOPOULOS 2020     #####
-######################################################
+<h1>Map transcription factor binding motifs to non-overlapping genomic regions and perform hypergeometric over/under representation test between groups</h1>
 
 Input file format: 
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
