@@ -12,9 +12,26 @@ Input file format:
 
 example:
 
-`chr1    123456    123465    0\n
- chr1    654321    654432    1`
-
+<table>
+  <tr>
+    <th>chr</th>
+    <th>start</th>
+    <th>stop</th>
+    <th>group_id</th>
+  </tr>
+  <tr>
+    <td>chr1</td>
+    <td>123456</td>
+    <td>123465</td>
+   <td>group_0</td>
+  </tr>
+  <tr>
+    <td>chr1</td>
+    <td>654321</td>
+    <td>654432</td>
+   <td>group_1</td>
+  </tr>
+</table>
 
 In order to run the script in your local directory follow these steps:
 
