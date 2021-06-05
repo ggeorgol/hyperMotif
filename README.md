@@ -2,7 +2,7 @@
 
 ######################################################
 #####        HYPERGEOMETRIC ENRICHMENT TEST      #####
-##### FOR TF MOTIF ENRICHMENT IN GENOMIC REGIONS #####
+##### FOR TF BINDING MOTIFS  IN GENOMIC REGIONS  #####
 #####      (c) GRIGORIOS GEORGOLOPOULOS 2020     #####
 ######################################################
 
@@ -12,8 +12,8 @@ Input file format:
 
 example:
 
-`chr1    123456    123465    0`
-`chr1    654321    654432    1`
+`chr1    123456    123465    0
+ chr1    654321    654432    1`
 
 
 In order to run the script in your local directory follow these steps:
