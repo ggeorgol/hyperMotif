@@ -9,6 +9,7 @@
 <br>
 R
 <br>
+The speed of this workflow depends on the `fread` function from the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">`data.table` package</a>
 <br>
 <h4>Arguments:</h4>
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
