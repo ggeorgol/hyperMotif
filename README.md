@@ -3,13 +3,15 @@
 <h3>Map transcription factor binding motifs to non-overlapping genomic regions and perform hypergeometric over/under representation test between groups</h3>
 
 <h4>Prerequisites:</h4>
-<a href='http://www.htslib.org/download/'>htslib</a>
+<a href="http://www.htslib.org/download/">htslib</a>
 <br>
 <a href="https://bedops.readthedocs.io/en/latest/">bedops</a>
 <br>
 R
 <br>
+<p>
 The speed of this workflow depends on the `fread` function from the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">`data.table` package</a>
+  </p>
 <br>
 <h4>Arguments:</h4>
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
