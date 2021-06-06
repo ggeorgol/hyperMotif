@@ -3,16 +3,17 @@
 <h3>Map transcription factor binding motifs to non-overlapping genomic regions and perform hypergeometric over/under representation test between groups</h3>
 
 <h4>Prerequisites:</h4>
-<a href='https://github.com/samtools/htslib/releases/download/1.12/htslib-1.12.tar.bz2'>htslib</a>
+<a href='http://www.htslib.org/download/'>htslib</a>
 <br>
 <a href="https://bedops.readthedocs.io/en/latest/">bedops</a>
 <br>
 R
 <br>
 
-Input file format: 
+Arguments: 
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
-2. motifs .gz file and accompanying tabix
+2. Specify the reference group which to compare each of the available groups. Either `rest` to compare against all groups or specify a `group_id`
+3. A .gz file with transcription factor motifs mapped to the genome and the accompanying tabix
 
 example:
 
@@ -46,6 +47,6 @@ In order to run the script in your local directory follow these steps:
 5.    `cp /home/ggeorgol/scripts/hypergeo_motif_enrichment.R ./` #make a copy to the second part of the script
 6.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz` #Copy motif archetype .gz file
 7.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz.tbi` #Copy the tabix index file
-8.    `./hypergeo_motif_enrichment.sh test.bed hg38.archetype_motifs.v1.0.bed.gz` #run the script
+8.    `./hypergeo_motif_enrichment.sh test.bed rest hg38.archetype_motifs.v1.0.bed.gz` #run the script
 
 The progress of the script will appear on the screen. Takes <5 min to run for ~100k elements. The results table should appear in your folder: `enrichment_results.txt`
