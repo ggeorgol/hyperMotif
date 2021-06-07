@@ -8,7 +8,7 @@
 <a href="https://bedops.readthedocs.io/en/latest/">bedops</a><br>
 R
 
-The speed of this workflow depends on the `fread` function from the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">`data.table` package</a>
+The speed of this workflow depends on the `fread` function from the R <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">`data.table` package</a>
 <br>
 <h4>Arguments:</h4>
 
