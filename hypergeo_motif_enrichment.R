@@ -46,7 +46,17 @@ motif_mat = Matrix::Matrix(table(master[,c(5,4)]), sparse = T)
 
 cat(paste0(Sys.time(),':',' Computing frequency and fold-changes per group'))
 
-results = data.frame(motif_name = NA, l2fc = NA, freq = NA, p_val = NA, fdr = NA, counts_in_cluster = NA, total_counts = NA, elements_in_cluster = NA, cluster = NA)
+results = data.frame(
+	motif_name = NA, 
+	l2fc = NA, 
+	freq = NA, 
+	p_val = NA, 
+	fdr = NA, 
+	counts_in_cluster = NA, 
+	total_counts = NA, 
+	elements_in_cluster = NA, 
+	cluster = NA
+		    )
 
 for(group in groups) {
     
