@@ -14,7 +14,7 @@ The speed of this workflow depends on the `fread` function from the R <a href="h
 
 1. bed file with non-overlapping genomic regions where a fourth column is the ID for your groups.
 2. Specify the reference group which to compare each of the available groups. Either `rest` to compare against all groups or specify a `group_id`
-3. A .gz file with transcription factor motifs mapped to the genome and the accompanying tabix
+3. A .gz file with transcription factor motifs mapped to the genome. (Tabix index must also be included in the same directory)
 
 example:
 
