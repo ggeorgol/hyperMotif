@@ -80,15 +80,15 @@ for(group in groups) {
               phyper(q-1, m, n, k, lower.tail = FALSE),
               phyper(q, m, n, k, lower.tail = TRUE))
     
-    tmp = data.frame(motif_name = motifs, 
-                     l2fc = diff_freq, 
-                     freq = freq, 
-                     p_val = p, 
-                     fdr = NA, 
-                     counts_in_cluster = q, 
-                     total_counts = m, 
-                     elements_in_cluster = k, 
-                     cluster = paste0(group,'_vs_',ref_group))
+    tmp = data.frame("motif_name" = motifs, 
+                     "l2fc" = diff_freq, 
+                     "freq" = freq, 
+                     "p_val" = p, 
+                     "fdr" = NA, 
+                     "counts_in_cluster" = q, 
+                     "total_counts" = m, 
+                     "elements_in_cluster" = k, 
+                     "group_id" = paste0(group,'_vs_',ref_group))
     
     results = rbind(results, tmp)
 
