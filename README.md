@@ -55,8 +55,42 @@ The output table consists of 9 columns explained below:
 
 <table>
   <tr>
-    <th>chr</th>
-    <th>start</th>
-    <th>stop</th>
-    <th>group_id</th>
+    <th>column name</th>
+    <th>explanation</th>
+  </tr>
+   <tr>
+    <td>motif_name</td>
+    <td>Name of archetype motif</td>
+  </tr>
+  <tr>
+    <td>l2fc</td>
+    <td>Log2 Fold-change in motif frequency over the reference</td>
+  </tr>
+  <tr>
+    <td>freq</td>
+    <td>Motif requency in query</td>
+  </tr>
+  <tr>
+    <td>p_val</td>
+    <td>Hypergeometric test p-value</td>
+  </tr>
+  <tr>
+    <td>fdr</td>
+    <td>Benjamini-Hochberg corrected p-value</td>
+  </tr>
+  <tr>
+    <td>counts_in_cluster</td>
+    <td>Motif counts in query</td>
+  </tr>
+  <tr>
+    <td>total_counts</td>
+    <td>Motif counts in entire dataset</td>
+  </tr>
+  <tr>
+    <td>elements_in_cluster</td>
+    <td>Total motifs in query</td>
+  </tr>
+  <tr>
+    <td>cluster</td>
+    <td>Group id</td>
   </tr>
