@@ -91,6 +91,6 @@ The output table consists of 9 columns explained below:
     <td>Total motifs in query</td>
   </tr>
   <tr>
-    <td>cluster</td>
+    <td>group_id</td>
     <td>Group id</td>
   </tr>
