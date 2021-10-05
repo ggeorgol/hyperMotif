@@ -41,12 +41,12 @@ example:
 
 In order to run the script in your local directory follow these steps:
 
-1.    `mkdir ~/my/directory` #optional: make a new directory to run your script
-2.    `cd ~/my/directory` #enter the directory
+1.    Make a new directory to run your script (optional)<br>`mkdir ~/my/directory` #optional: 
+2.    enter the directory<br>`cd ~/my/directory`
 3.    make sure your bed file is in the directory
-4.    `clone` this repository into your directory
-6.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz` #Download human TF motif archetypes mapped to hg38 .gz file
-7.    `wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz.tbi` #Download the tabix index file
-8.    `./hypergeo_motif_enrichment.sh test.bed rest hg38.archetype_motifs.v1.0.bed.gz` #run the script
+4.    `clone` this repository into your directory<br>`git clone https://github.com/ggeorgol/TF_motif_enrichment`
+5.    Download human TF motif archetypes <br>`wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz`mapped to hg38 .gz file
+6.    Download the tabix index file<br>`wget https://resources.altius.org/~jvierstra/projects/motif-clustering/releases/v1.0/hg38.archetype_motifs.v1.0.bed.gz.tbi`
+7.    Run the script<br>`./hypergeo_motif_enrichment.sh test.bed rest hg38.archetype_motifs.v1.0.bed.gz`
 
 The progress of the script will appear on the screen. Takes <5 min to run for ~100k elements. The results table should appear in your folder: `enrichment_results.txt`
