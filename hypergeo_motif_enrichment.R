@@ -5,7 +5,7 @@ pkgs = c('data.table','Matrix')
 for (pkg in pkgs) {
 
 	if (!require(pkg, character.only = TRUE)) {
-
+    print(sprintf("Installing package %s", pkg))
 	install.packages(pkg)
 
 	library(pkg, character.only = TRUE)
@@ -46,17 +46,7 @@ motif_mat = Matrix::Matrix(table(master[,c(5,4)]), sparse = T)
 
 cat(paste0(Sys.time(),':',' Computing frequency and fold-changes per group'))
 
-results = data.frame(
-	motif_name = NA, 
-	l2fc = NA, 
-	freq = NA, 
-	p_val = NA, 
-	fdr = NA, 
-	counts_in_cluster = NA, 
-	total_counts = NA, 
-	elements_in_cluster = NA, 
-	cluster = NA
-		    )
+results = data.frame()
 
 for(group in groups) {
     
@@ -75,18 +65,22 @@ for(group in groups) {
     query = t(motif_mat[test_regions, ])
     ref = t(motif_mat[ref_regions, ])
     
-    freq = rowSums(query)/sum(rowSums(query))
+    freqs_query = rowSums(query)/sum(rowSums(query))
+    freq_ref = rowSums(ref)/sum(rowSums(ref))
     
-    diff_freq = log2(freq)-log2(rowSums(ref)/sum(rowSums(ref)))
+    diff_freq = log2(freqs_query)-log2(freq_ref)
 
-    q = rowSums(query) # number of white balls drawn
-    m = q + rowSums(ref) # total number of white balls
+    freq = freqs_query[motif]
+    q = rowSums(query[motif,]) # number of white balls drawn
+    m = q + rowSums(ref[motif,]) # total number of white balls
     n = sum(rowSums(query)) + sum(rowSums(ref)) - m # total number of black balls
     k = sum(rowSums(query)) # number of balls drawn
     
-    p = phyper(q, m, n, k, lower.tail = ifelse(freq > 0, FALSE, TRUE))
+    p = ifelse(diff_freq > 0, 
+              phyper(q-1, m, n, k, lower.tail = FALSE),
+              phyper(q, m, n, k, lower.tail = TRUE))
     
-    enr = data.frame(motif_name = motifs, 
+    tmp = data.frame(motif_name = motifs, 
                      l2fc = diff_freq, 
                      freq = freq, 
                      p_val = p, 
@@ -96,17 +90,11 @@ for(group in groups) {
                      elements_in_cluster = k, 
                      cluster = paste0(group,'_vs_',ref_group))
     
-    results = rbind(results, enr)
+    results = rbind(results, tmp)
 
 }
 
-results = results[-1,]
 results$fdr = p.adjust(results$p_val, method = 'BH')
 results = results[order(results$cluster, -results$l2fc),]
-#results$TF_Symbol = sapply(results$motif_name, FUN = function(i){
-#    
-#    paste(unique(sort(arch_anno$TF_Symbol[ arch_anno$Cluster_Name == i ])), collapse = ';')
-#    
-#})
 
 write.table(results, 'enrichment_results.txt', col.names = TRUE, row.names = FALSE, quote = FALSE, sep = '\t')
