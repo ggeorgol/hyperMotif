@@ -70,9 +70,9 @@ for(group in groups) {
     
     diff_freq = log2(freqs_query)-log2(freq_ref)
 
-    freq = freqs_query[motif]
-    q = rowSums(query[motif,]) # number of white balls drawn
-    m = q + rowSums(ref[motif,]) # total number of white balls
+    freq = freqs_query[motifs]
+    q = rowSums(query[motifs,]) # number of white balls drawn
+    m = q + rowSums(ref[motifs,]) # total number of white balls
     n = sum(rowSums(query)) + sum(rowSums(ref)) - m # total number of black balls
     k = sum(rowSums(query)) # number of balls drawn
     
@@ -95,6 +95,6 @@ for(group in groups) {
 }
 
 results$fdr = p.adjust(results$p_val, method = 'BH')
-results = results[order(results$cluster, -results$l2fc),]
+results = results[order(results$group_id, -results$l2fc),]
 
 write.table(results, 'enrichment_results.txt', col.names = TRUE, row.names = FALSE, quote = FALSE, sep = '\t')
