@@ -39,7 +39,7 @@ echo $(date +"%Y-%m-%d %T %Z") "Mapping motifs to query"
 
 cut -f 1-3 $REGIONS | sort-bed - | tabix -R - $MOTIFS | sort-bed - > $TEMPDIR/motifs_mapped_to_query.txt
 
-echo $(date +"%Y-%m-%d %T %Z") "Assigning DHS index to mapped motifs"
+echo $(date +"%Y-%m-%d %T %Z") "Assigning region index to mapped motifs"
 
 cut -f 1-4 $TEMPDIR/motifs_mapped_to_query.txt | bedmap --ec --echo --echo-map-id --skip-unmapped --delim '\t' - $TEMPDIR/regions.bed > $TEMPDIR/motifs_to_region_index.txt
 
