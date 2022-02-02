@@ -22,11 +22,11 @@ fi
 
 if [ "$REF" == "rest" ];
 then
-	echo 'Compare enchrichment against' $REF
+	echo 'Calculating enchrichment against' $REF
 else
 	if grep -Rq $REF $REGIONS;
 	then
-		echo 'Compare enchrichment against' $REF
+		echo 'Calculating enchrichment against' $REF
 	else
 		echo 'Please select one of:' `cut -f 4 $REGIONS | sort | uniq | tr '\n' '\ '`
 		exit 1
