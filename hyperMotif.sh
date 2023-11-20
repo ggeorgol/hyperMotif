@@ -106,7 +106,7 @@ cut -f 1-4 $TEMPDIR/motifs_mapped_to_query.txt | bedmap --ec --echo --echo-map-i
 
 RINPUT=$TEMPDIR/motifs_to_region_index.txt
 
-Rscript $SCRIPTPARENT/r/hypergeo_motif_enrichment.R $RINPUT $TEMPDIR/regions.bed $REF $OUTDIR
+Rscript $SCRIPTPARENT/r/hyperMotif.R $RINPUT $TEMPDIR/regions.bed $REF $OUTDIR
 
 #rm -r $TEMPDIR
 
