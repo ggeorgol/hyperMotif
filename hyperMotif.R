@@ -102,7 +102,7 @@ for(group in groups[!groups %in% ref_group]) {
               phyper(q, m, n, k, lower.tail = TRUE))
     
     tmp = data.frame("motif_name" = motifs, 
-                     "l2fc" = diff_freq, 
+                     "log2Ratio" = diff_freq, 
                      "freq" = freq, 
                      "p_val" = p, 
                      "fdr" = NA, 
