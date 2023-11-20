@@ -62,7 +62,7 @@ Usage:
 
 <h4>Output</h4>
 
-The output table consists of 9 columns explained below:
+The output table at `outDir/enrichment_results.txt` consists of 9 columns explained below:
 
 <table>
   <tr>
