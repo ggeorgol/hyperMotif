@@ -104,7 +104,7 @@ for(group in groups[!groups %in% ref_group]) {
     tmp = data.frame("motif_name" = motifs, 
                      "log2Ratio" = diff_freq, 
                      "freq" = freq, 
-                     "p_val" = p, 
+                     "pval" = p, 
                      "fdr" = NA, 
                      "motif_counts_in_test" = q, 
                      "motif_counts_in_reference" = m - q, 
