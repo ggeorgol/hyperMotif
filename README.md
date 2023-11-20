@@ -54,7 +54,8 @@ The progress of the script will appear on the screen. Takes <5 min to run for ~1
 ```
 Usage:
 	-b  A 4-column BED file where 4th column is the group assignment
-	-r  The reference group. Should be one of the available groups or set to 'rest' \nto compare against the rest of the groups
+	-r  The reference group. Should be one of the available groups or set to 'rest'
+	    to compare against the rest of the groups
 	-m  The motif scans file
 	-o  The output directory
 ```
