@@ -29,13 +29,13 @@ example:
     <td>chr1</td>
     <td>123456</td>
     <td>123465</td>
-   <td>group_0</td>
+   <td>groupA</td>
   </tr>
   <tr>
     <td>chr1</td>
     <td>654321</td>
     <td>654432</td>
-   <td>group_1</td>
+   <td>groupB</td>
   </tr>
 </table>
 
