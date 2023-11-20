@@ -1,4 +1,4 @@
-# TF_motif_enrichment
+# hyperMotif
 
 <h3>Map transcription factor binding motifs to non-overlapping genomic regions and perform hypergeometric over/under representation test between groups</h3>
 
