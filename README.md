@@ -71,15 +71,15 @@ The output table consists of 9 columns explained below:
   </tr>
    <tr>
     <td>motif_name</td>
-    <td>Name of archetype motif</td>
+    <td>Name of <i>i</i>-th archetype motif</td>
   </tr>
   <tr>
     <td>l2fc</td>
-    <td>Log2 Fold-change in motif frequency over the reference</td>
+    <td>Log2 Fold-change in <i>i</i>-th motif frequency over the reference</td>
   </tr>
   <tr>
     <td>freq</td>
-    <td>Motif requency in query</td>
+    <td><i>i</i>-th motif frequency in query</td>
   </tr>
   <tr>
     <td>p_val</td>
