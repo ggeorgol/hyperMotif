@@ -39,7 +39,7 @@ example:
   </tr>
 </table>
 
-In order to run the script in your local directory follow these steps:
+<h4>How to run</h4>
 
 1.    Make a new directory to run your script (optional)<br>`mkdir ~/my/directory` #optional: 
 2.    Enter the directory<br>`cd ~/my/directory`
