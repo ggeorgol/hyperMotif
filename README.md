@@ -82,7 +82,7 @@ The output table at `outDir/enrichment_results.txt` consists of 10 columns expla
     <td><i>i</i>-th motif frequency in query</td>
   </tr>
   <tr>
-    <td>p_val</td>
+    <td>pval</td>
     <td>Hypergeometric test p-value</td>
   </tr>
   <tr>
