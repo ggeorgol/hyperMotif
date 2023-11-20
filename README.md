@@ -74,8 +74,8 @@ The output table consists of 9 columns explained below:
     <td>Name of <i>i</i>-th archetype motif</td>
   </tr>
   <tr>
-    <td>l2fc</td>
-    <td>Log2 Fold-change in <i>i</i>-th motif frequency over the reference</td>
+    <td>log2Ratio</td>
+    <td>Log2 ratio in <i>i</i>-th motif frequency over the reference</td>
   </tr>
   <tr>
     <td>freq</td>
