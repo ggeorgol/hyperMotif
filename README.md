@@ -51,6 +51,14 @@ In order to run the script in your local directory follow these steps:
 
 The progress of the script will appear on the screen. Takes <5 min to run for ~100k elements. The results table should appear in your folder: `enrichment_results.txt`
 
+```
+Usage:
+	-b  A 4-column BED file where 4th column is the group assignment
+	-r  The reference group. Should be one of the available groups or set to 'rest' \nto compare against the rest of the groups
+	-m  The motif scans file
+	-o  The output directory
+```
+
 The output table consists of 9 columns explained below:
 
 <table>
