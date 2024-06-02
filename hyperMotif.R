@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-pkgs = c('data.table','Matrix', 'tidyverse')
+pkgs <- c('data.table','Matrix', 'tidyverse')
 
 for (pkg in pkgs) {
 
@@ -16,14 +16,19 @@ for (pkg in pkgs) {
 
 }
 
-args = commandArgs(trailingOnly = TRUE)
-
 options(scipen = 4)
+
+args <- commandArgs(trailingOnly = TRUE)
+outdir <- args[1] #"enrichment_all_motifs"
+ref_group <- args[2]
+
+motifs_to_regions <- file.path(outdir, "tmp_motif_enrichment/motifs_to_region_index.txt")
+regions <- file.path(outdir, "tmp_motif_enrichment/regions.bed")
 
 message(paste0(Sys.time(),':',' Reading motif matches\n'))
 
-master = fread(args[1], sep = '\t', stringsAsFactors = F, data.table = F)
-outfile = args[4]
+master <- fread(motifs_to_regions, sep = '\t', stringsAsFactors = F, data.table = F)
+
 
 #### Fix overlapping matches ####
 
@@ -41,14 +46,13 @@ mutate(id = paste(V1,V2,V3,V4)) %>%
 filter(!duplicated(id)) %>% 
 separate_rows(V5,sep = ';') 
 
-motifs = unique(sort(master$V4))
+motifs <- unique(sort(master$V4))
 
-input=fread(args[2], sep = '\t', stringsAsFactors = F, data.table = F, select = 1:5)
+input <- fread(regions, sep = '\t', stringsAsFactors = F, 
+data.table <- F, select = 1:5)
 
-groups = unique(sort(input$V5))
-
-ref_group = args[3]
-
+groups <- unique(sort(input$V5))
+test_groups <- groups[!groups %in% ref_group]
 
 ################################################
 #####        Calculate counts matrix       #####
@@ -56,52 +60,52 @@ ref_group = args[3]
 
 message(paste0(Sys.time(),':',' Computing DHS by Motif count matrix\n'))
 
-motif_mat = Matrix::Matrix(table(master[,c(5,4)]), sparse = T)
+motif_mat <- Matrix::Matrix(table(master[,c(5,4)]), sparse = T)
 
 ################################################
 ##### Calculate frequency and fold-changes #####
 ################################################
 
-results = data.frame()
+results <- data.frame()
 
-for(group in groups[!groups %in% ref_group]) {
+for(group in test_groups) {
 
     message(paste0(Sys.time(),':',' Computing frequency and fold-changes for group ',group,'\n'))
     
-    test_regions = input$V4[ input$V5 == group ]
-    test_regions = intersect(master$V5, test_regions)
+    test_regions <- input$V4[ input$V5 == group ]
+    test_regions <- intersect(master$V5, test_regions)
 
     if (ref_group == 'rest') {
 
-    	ref_regions = input$V4[ input$V5 != group ]
+    	ref_regions <- input$V4[ input$V5 != group ]
 
     } else {
 
-    	ref_regions = input$V4[ input$V5 == ref_group ]
+    	ref_regions <- input$V4[ input$V5 == ref_group ]
 
     }
 
-    ref_regions = intersect(master$V5, ref_regions)
+    ref_regions <- intersect(master$V5, ref_regions)
     
-    query = t(motif_mat[test_regions, ])
-    ref = t(motif_mat[ref_regions, ])
+    query <- t(motif_mat[test_regions, ])
+    ref <- t(motif_mat[ref_regions, ])
     
-    freqs_query = rowSums(query)/sum(rowSums(query))
-    freq_ref = rowSums(ref)/sum(rowSums(ref))
+    freqs_query <- rowSums(query)/sum(rowSums(query))
+    freq_ref <- rowSums(ref)/sum(rowSums(ref))
     
-    diff_freq = log2(freqs_query)-log2(freq_ref)
+    diff_freq <- log2(freqs_query)-log2(freq_ref)
 
-    freq = freqs_query[motifs]
-    q = rowSums(query[motifs,]) # number of white balls drawn
-    m = q + rowSums(ref[motifs,]) # total number of white balls
-    n = sum(rowSums(query)) + sum(rowSums(ref)) - m # total number of black balls
-    k = sum(rowSums(query)) # number of balls drawn
+    freq <- freqs_query[motifs]
+    q <- rowSums(query[motifs,]) # number of white balls drawn
+    m <- q + rowSums(ref[motifs,]) # total number of white balls
+    n <- sum(rowSums(query)) + sum(rowSums(ref)) - m # total number of black balls
+    k <- sum(rowSums(query)) # number of balls drawn
     
-    p = ifelse(diff_freq > 0, 
+    p <- ifelse(diff_freq > 0, 
               phyper(q-1, m, n, k, lower.tail = FALSE),
               phyper(q, m, n, k, lower.tail = TRUE))
     
-    tmp = data.frame("motif_name" = motifs, 
+    tmp <- data.frame("motif_name" = motifs, 
                      "log2Ratio" = diff_freq, 
                      "freq" = freq, 
                      "pval" = p, 
@@ -111,12 +115,14 @@ for(group in groups[!groups %in% ref_group]) {
                      "total_motifs_in_test" = k, 
                      "contrast" = paste0(group,'_vs_',ref_group))
     
-    results = rbind(results, tmp)
+    results <- rbind(results, tmp)
 
 }
 
-results$fdr = p.adjust(results$p_val, method = 'BH')
-results = results[order(results$contrast, -results$l2fc),]
+results <- results %>% 
+mutate(fdr = p.adjust(pval, method = 'BH')) %>%
+arrange(contrast, -log2Ratio)
 
 #print(results)
-write.table(results, paste0(outfile,'/enrichment_results.txt'), col.names = TRUE, row.names = FALSE, quote = FALSE, sep = '\t')
+write.table(results, file.path(outdir,"/enrichment_results.txt"), 
+col.names = TRUE, row.names = FALSE, quote = FALSE, sep = '\t')

@@ -43,9 +43,13 @@ done
 
 TEMPDIR=$OUTDIR/"tmp_motif_enrichment/"
 
-SCRIPT=`realpath $0`
-SCRIPTPATH=`dirname $SCRIPT`
-SCRIPTPARENT=`dirname $SCRIPTPATH`
+SCRIPT=$(realpath "${0}")
+SCRIPTPATH=$(dirname "${SCRIPT}")
+SCRIPTPARENT=$(dirname "${SCRIPTPATH}")
+
+echo ${SCRIPT}
+echo ${SCRIPTPATH}
+echo ${SCRIPTPARENT}
 
 #REGIONS=$1
 #REF=$2
@@ -62,11 +66,11 @@ if [[ ! -f "${MOTIFS}" ]]; then
 exit 1
 fi
 
-if [[ ! -d $OUTDIR ]]; then
-mkdir -p $OUTDIR
+if [[ ! -d "${OUTDIR}" ]]; then
+mkdir -p "${OUTDIR}"
 fi
 
-mkdir -p $TEMPDIR
+mkdir -p "${TEMPDIR}"
 
 NF=`awk '{print NF; exit}' $REGIONS`
 
@@ -78,7 +82,9 @@ fi
 
 NROW=$(wc -l "${REGIONS}" | cut -d ' ' -f 1)
 echo "$NROW regions detected"
-cut -f 4 $REGIONS | sort | uniq -c
+cut -f 4 $REGIONS \
+| sort \
+| uniq -c
 
 if [ "$REF" == "rest" ];
 then
@@ -88,16 +94,23 @@ else
 	then
 		echo $(date +"%Y-%m-%d %T %Z") 'Testing enchrichment against' $REF
 	else
-		echo 'Please select one of:' `cut -f 4 $REGIONS | sort | uniq | tr '\n' '\ '`1>&2
+		echo 'Please select one of:' `cut -f 4 $REGIONS \
+    | sort \
+    | uniq \
+    | tr '\n' '\ '`1>&2
 		exit 1
 	fi
 fi
 
-awk -F'\t' '{print $1 FS $2 FS $3 FS "region"FNR FS $4;}' $REGIONS | sort-bed - > $TEMPDIR/regions.bed
+awk -F'\t' '{print $1 FS $2 FS $3 FS "region"FNR FS $4;}' $REGIONS \
+| sort-bed - > $TEMPDIR/regions.bed
 
 echo $(date +"%Y-%m-%d %T %Z") "Mapping motifs to query"
 
-cut -f 1-3 $REGIONS | sort-bed - | tabix -R - $MOTIFS | sort-bed - > $TEMPDIR/motifs_mapped_to_query.txt
+cut -f 1-3 $REGIONS \
+| sort-bed - \
+| tabix -R - $MOTIFS \
+| sort-bed - > $TEMPDIR/motifs_mapped_to_query.txt
 #tabix -R $TEMPDIR/regions.bed $MOTIFS | sort-bed - > $TEMPDIR/motifs_mapped_to_query.txt
 
 echo $(date +"%Y-%m-%d %T %Z") "Assigning DHS index to mapped motifs"
@@ -106,7 +119,7 @@ cut -f 1-4 $TEMPDIR/motifs_mapped_to_query.txt | bedmap --ec --echo --echo-map-i
 
 RINPUT=$TEMPDIR/motifs_to_region_index.txt
 
-Rscript $SCRIPTPARENT/r/hyperMotif.R $RINPUT $TEMPDIR/regions.bed $REF $OUTDIR
+Rscript "${SCRIPTPATH}"/hyperMotif.R ${OUTDIR} ${REF}
 
 #rm -r $TEMPDIR
 
