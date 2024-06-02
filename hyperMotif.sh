@@ -115,7 +115,8 @@ cut -f 1-3 $REGIONS \
 
 echo $(date +"%Y-%m-%d %T %Z") "Assigning DHS index to mapped motifs"
 
-cut -f 1-4 $TEMPDIR/motifs_mapped_to_query.txt | bedmap --ec --echo --echo-map-id --skip-unmapped --delim '\t' - $TEMPDIR/regions.bed > $TEMPDIR/motifs_to_region_index.txt
+cut -f 1-4 $TEMPDIR/motifs_mapped_to_query.txt \
+| bedmap --ec --echo --echo-map-id --skip-unmapped --delim '\t' - $TEMPDIR/regions.bed > $TEMPDIR/motifs_to_region_index.txt
 
 RINPUT=$TEMPDIR/motifs_to_region_index.txt
 

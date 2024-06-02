@@ -49,7 +49,7 @@ separate_rows(V5,sep = ';')
 motifs <- unique(sort(master$V4))
 
 input <- fread(regions, sep = '\t', stringsAsFactors = F, 
-data.table <- F, select = 1:5)
+data.table = F, select = 1:5)
 
 groups <- unique(sort(input$V5))
 test_groups <- groups[!groups %in% ref_group]
