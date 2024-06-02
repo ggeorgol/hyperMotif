@@ -22,10 +22,10 @@ args <- commandArgs(trailingOnly = TRUE)
 outdir <- args[1] #"enrichment_all_motifs"
 ref_group <- args[2]
 
-motifs_to_regions <- file.path(outdir, "tmp_motif_enrichment/motifs_to_region_index.txt")
-regions <- file.path(outdir, "tmp_motif_enrichment/regions.bed")
+motifs_to_regions <- file.path(outdir, "tmp/motifs_to_region_index.txt")
+regions <- file.path(outdir, "tmp/regions.bed")
 
-message(paste0(Sys.time(),':',' Reading motif matches\n'))
+message(paste0(Sys.time(),':',' Reading motif matches'))
 
 master <- fread(motifs_to_regions, sep = '\t', stringsAsFactors = F, data.table = F)
 
@@ -39,7 +39,7 @@ master <- fread(motifs_to_regions, sep = '\t', stringsAsFactors = F, data.table 
 #    master[grep('\\;',master$V5),5] = oo
 #}
 
-message(paste0(Sys.time(),':',' Separating motifs overlapping multiple peaks\n'))
+message(paste0(Sys.time(),':',' Separating motifs overlapping multiple peaks'))
 
 master <- master %>% 
 mutate(id = paste(V1,V2,V3,V4)) %>% 
@@ -58,7 +58,7 @@ test_groups <- setdiff(groups, ref_group)
 #####        Calculate counts matrix       #####
 ################################################
 
-message(paste0(Sys.time(),':',' Computing DHS by Motif count matrix\n'))
+message(paste0(Sys.time(),':',' Computing DHS by Motif count matrix'))
 
 motif_mat <- Matrix::Matrix(table(master[,c(5,4)]), sparse = T)
 
@@ -70,7 +70,7 @@ results <- data.frame()
 
 for(group in test_groups) {
 
-    message(paste0(Sys.time(),':',' Computing frequency and fold-changes for group ',group,'\n'))
+    message(paste0(Sys.time(),':',' Computing frequency and fold-changes for group ',group,''))
     
     test_regions <- input$V4[ input$V5 == group ]
     test_regions <- intersect(master$V5, test_regions)
@@ -126,3 +126,5 @@ arrange(contrast, -log2Ratio)
 #print(results)
 write.table(results, file.path(outdir,"/enrichment_results.txt"), 
 col.names = TRUE, row.names = FALSE, quote = FALSE, sep = '\t')
+
+message(paste0(Sys.time(),':',' Completed successfully!'))

@@ -41,7 +41,20 @@ echo "	-o  The output directory"
   esac
 done
 
-TEMPDIR=$OUTDIR/"tmp_motif_enrichment/"
+if ! command -v tabix &> /dev/null
+then
+    echo "tabix could not be found. Make sure htsilb is installed and tabix is in your path."
+    exit 1
+fi
+
+if ! command -v bedmap &> /dev/null
+then
+    echo "bedmap could not be found. Make sure bedops is installed and is in your path."
+    exit 1
+fi
+
+
+TEMPDIR=$OUTDIR/"tmp"
 
 SCRIPT=$(realpath "${0}")
 SCRIPTPATH=$(dirname "${SCRIPT}")
@@ -94,10 +107,10 @@ else
 	then
 		echo $(date +"%Y-%m-%d %T %Z") 'Testing enchrichment against' $REF
 	else
-		echo 'Please select one of:' `cut -f 4 $REGIONS \
+		echo 'Please select one of:' $(cut -f 4 $REGIONS \
     | sort \
     | uniq \
-    | tr '\n' '\ '`1>&2
+    | tr '\n' '\ ') 1>&2
 		exit 1
 	fi
 fi
