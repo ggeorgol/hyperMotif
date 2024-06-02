@@ -52,7 +52,7 @@ input <- fread(regions, sep = '\t', stringsAsFactors = F,
 data.table = F, select = 1:5)
 
 groups <- unique(sort(input$V5))
-test_groups <- groups[!groups %in% ref_group]
+test_groups <- setdiff(groups, ref_group)
 
 ################################################
 #####        Calculate counts matrix       #####
